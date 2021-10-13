@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>paivitavaappu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Päivitä vaapun tiedot</h1>
+	<div>
+    	<form th:object="${vaappu}" th:action="@{../save}" action="#" method="post">
+    	
+			<input type="hidden" id="id" th:field="*{id}" class="form-control"/> 	
+		  	<label for="nimi">Vaapun nini</label>
+			<input type="text" id="nimi" th:field="*{nimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="tekija">Tekijä</label>
+			<input type="text" id="tekija" th:field="*{tekija}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="pituus">Pituus</label>
+			<input type="text" id="pituus" th:field="*{pituus}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="vari">Väri</label>
+			<input type="text" id="vari" th:field="*{vari}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			 <select id="mallilista" th:field="*{malli}" class="form-control">
+       			<option th:each="malli: ${malli}" th:value="${malli.malliid}" th:text="${malli.mallinimi}"></option>
+    		</select>
+			<br>
+			<br>
+			<input type="submit" class="btn btn-success" value="Tallenna"></input>
+    	</form>
+     </div>
+     <br>
+     <br>  	
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>lisaavaappu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää uusi vaappu</h1>
+	
+	<div class="form" style="clear: both; display: block; height: 10px;">
+    	<form th:object="${vaappu}" th:action="@{save}" action="#" method="post">
+		  <table>
+		  	<tr>
+		  		<td>Vaapun nimi:</td>
+				<td><input type="text" id="nimi" th:field="*{nimi}"></input></td>
+				<td th:if="${#fields.hasErrors('nimi')}" th:class="error" th:errors="*{nimi}">Error</td>
+			</tr>
+		  	<tr>
+		  		<td>Tekijä:</td>
+				<td><input type="text" id="tekija" th:field="*{tekija}"></input></td>
+				<td th:if="${#fields.hasErrors('tekija')}" th:errors="*{tekija}">Error</td>
+			</tr>
+			<tr>
+		  		<td>Pituus:</td>
+				<td><input type="text" id="pituus" th:field="*{pituus}"></input></td>
+			</tr>
+			<tr>
+				<td>Väri:</td>
+				<td><input type="text" id="vari" th:field="*{vari}"></input></td>
+			</tr>
+			<tr>
+				<td>Malli:</td>
+			 	<td><select id="mallilista" th:field="*{malli}" class="form-control">
+       				<option th:each="malli: ${malli}" th:value="${malli.malliid}" th:text="${malli.mallinimi}"></option>
+       			</select></td>
+			</tr>
+			</div>
+			</table>
+			<input type="submit" value="Tallenna"></input>
+    	</form>
+     </div>  	
+</body>
+</html>

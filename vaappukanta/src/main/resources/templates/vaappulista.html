@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vaappuja</title>
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Vaappuja</h1>
+	<div class="col-md-4">
+		<h3 th:inline="text">Tervetuloa [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    <table class="table table-striped">
+		<tr>
+		    <th>Vaapun nimi</th>
+		    <th>Tekijä</th>
+		    <th>Pituus</th>
+		    <th>Väri</th>
+		    <th>Malli</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"></th>
+		    
+		</tr>  
+    	<tr th:each = "vaappu : ${vaaput}">
+    		<td th:text="${vaappu.nimi}"></td>
+    		<td th:text="${vaappu.tekija}"></td>
+    		<td th:text="${vaappu.pituus}"></td>
+    		<td th:text="${vaappu.vari}"></td>
+    		<td th:text="${vaappu.malli.mallinimi}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${vaappu.id})}" class="btn btn-xs btn-danger">Poista</a></td>	
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${vaappu.id})}" class="btn btn-success">Muokkaa</a></td>	
+    	</tr>
+     </table>
+     <br>
+     <br>
+	 <a href="/lisaavaappu" class="btn btn-success">Lisää uusi vaappu</a>    	
+</body>
+</html>
